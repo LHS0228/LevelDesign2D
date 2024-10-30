@@ -10,6 +10,9 @@ namespace Gamekit2D
     [RequireComponent(typeof(Animator))]
     public class PlayerCharacter : MonoBehaviour
     {
+        private int maxJumpCount = 1; // 점프 후 최대 점프 가능 횟수
+        private int jumpCount; // 현재 점프 횟수
+
         static protected PlayerCharacter s_PlayerInstance;
         static public PlayerCharacter PlayerInstance { get { return s_PlayerInstance; } }
 
@@ -439,6 +442,7 @@ namespace Gamekit2D
 
             if (grounded)
             {
+                jumpCount = 0; // 땅에 착지하면 점프 횟수를 0으로 초기화시킴
                 FindCurrentSurface();
 
                 if (!wasGrounded && m_MoveVector.y < -1.0f)
@@ -535,6 +539,14 @@ namespace Gamekit2D
             if (!PlayerInput.Instance.Jump.Held && m_MoveVector.y > 0.0f)
             {
                 m_MoveVector.y -= jumpAbortSpeedReduction * Time.deltaTime;
+            }
+            if (CheckForJumpInput()) // 이게 더블 점프 시켜주는 코드
+            {
+                if (jumpCount < maxJumpCount)
+                {
+                    SetVerticalMovement(jumpSpeed);
+                    jumpCount++;
+                }
             }
         }
 
