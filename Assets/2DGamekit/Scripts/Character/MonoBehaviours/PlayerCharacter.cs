@@ -10,9 +10,6 @@ namespace Gamekit2D
     [RequireComponent(typeof(Animator))]
     public class PlayerCharacter : MonoBehaviour
     {
-        private int maxJumpCount = 1; // 점프 후 최대 점프 가능 횟수
-        private int jumpCount; // 현재 점프 횟수
-
         static protected PlayerCharacter s_PlayerInstance;
         static public PlayerCharacter PlayerInstance { get { return s_PlayerInstance; } }
 
@@ -20,6 +17,12 @@ namespace Gamekit2D
         {
             get { return m_InventoryController; }
         }
+
+        public bool onPlayerStop;
+        [SerializeField]
+        private int maxJumpCount = 1; // 점프 후 최대 점프 가능 횟수
+        [SerializeField]
+        private int jumpCount; // 현재 점프 횟수
 
         public SpriteRenderer spriteRenderer;
         public Damageable damageable;
@@ -203,12 +206,15 @@ namespace Gamekit2D
         }
 
         void FixedUpdate()
-        { 
-            m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
-            m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
-            m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
-            UpdateBulletSpawnPointPositions();
-            UpdateCameraFollowTargetPosition();
+        {
+            if (!onPlayerStop)
+            {
+                m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
+                m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
+                m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
+                UpdateBulletSpawnPointPositions();
+                UpdateCameraFollowTargetPosition();
+            }
         }
 
         public void Unpause()
