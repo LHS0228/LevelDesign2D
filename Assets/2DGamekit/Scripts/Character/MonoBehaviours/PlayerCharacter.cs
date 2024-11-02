@@ -95,6 +95,8 @@ namespace Gamekit2D
         protected float m_VerticalCameraOffsetTimer;
         protected InventoryController m_InventoryController;
 
+        protected CharacterSpecialKey characterSpecialKey; // 더블점프 추가 코드
+
         protected Checkpoint m_LastCheckpoint = null;
         protected Vector2 m_StartingPosition = Vector2.zero;
         protected bool m_StartingFacingLeft = false;
@@ -131,6 +133,8 @@ namespace Gamekit2D
             m_Capsule = GetComponent<CapsuleCollider2D>();
             m_Transform = transform;
             m_InventoryController = GetComponent<InventoryController>();
+
+            characterSpecialKey = GetComponent<CharacterSpecialKey>(); // 컴포넌트 추가
 
             m_CurrentBulletSpawnPoint = spriteOriginallyFacesLeft ? facingLeftBulletSpawnPoint : facingRightBulletSpawnPoint;
         }
@@ -550,7 +554,7 @@ namespace Gamekit2D
             {
                 m_MoveVector.y -= jumpAbortSpeedReduction * Time.deltaTime;
             }
-            if (CheckForJumpInput()) // 이게 더블 점프 시켜주는 코드
+            if (CheckForJumpInput() && characterSpecialKey.onDoubleJump == true) // 이게 더블 점프 시켜주는 코드
             {
                 if (jumpCount < maxJumpCount)
                 {
