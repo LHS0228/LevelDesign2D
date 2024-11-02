@@ -16,6 +16,7 @@ public class CharacterSpecialKey : MonoBehaviour
     [Header("기술 사용 설정")]
     public bool onDash = false;
     public bool onGlider = false;
+    public bool onDoubleJump = false;
 
     [Header("대쉬 설정")]
     public float dashMaxSpeed = 14;
