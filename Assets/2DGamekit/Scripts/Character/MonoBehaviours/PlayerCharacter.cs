@@ -18,6 +18,7 @@ namespace Gamekit2D
             get { return m_InventoryController; }
         }
 
+        public bool onMoveStop;
         public bool onPlayerStop;
         [SerializeField]
         private int maxJumpCount = 1; // 점프 후 최대 점프 가능 횟수
@@ -70,7 +71,7 @@ namespace Gamekit2D
 
         public bool spriteOriginallyFacesLeft;
 
-        protected CharacterController2D m_CharacterController2D;
+        public CharacterController2D m_CharacterController2D;
         protected Animator m_Animator;
         protected CapsuleCollider2D m_Capsule;
         protected Transform m_Transform;
@@ -209,7 +210,10 @@ namespace Gamekit2D
         {
             if (!onPlayerStop)
             {
-                m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
+                if (!onMoveStop)
+                {
+                    m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
+                }
                 m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
                 m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
                 UpdateBulletSpawnPointPositions();
