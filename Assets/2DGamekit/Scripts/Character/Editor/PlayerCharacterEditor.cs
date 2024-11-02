@@ -8,6 +8,10 @@ namespace Gamekit2D
     [CustomEditor(typeof(PlayerCharacter))]
     public class PlayerCharacterEditor : Editor
     {
+        SerializedProperty m_OnPlayerStopProp;
+        SerializedProperty m_MaxJumpCountProp;
+        SerializedProperty m_JumpCountProp;
+
         SerializedProperty m_SpriteRendererProp;
         SerializedProperty m_DamageableProp;
         SerializedProperty m_MeleeDamagerProp;
@@ -63,6 +67,7 @@ namespace Gamekit2D
         bool m_AudioSettingsFoldout;
         bool m_CameraFollowSettingsFoldout;
         bool m_MiscSettingsFoldout;
+        bool m_customVariablesFoldout;
 
         readonly GUIContent m_SpriteRendererContent = new GUIContent("Sprite Renderer");
         readonly GUIContent m_DamageableContent = new GUIContent("Damageable");
@@ -122,6 +127,10 @@ namespace Gamekit2D
 
         void OnEnable ()
         {
+            m_OnPlayerStopProp = serializedObject.FindProperty("onPlayerStop");
+            m_MaxJumpCountProp = serializedObject.FindProperty("maxJumpCount");
+            m_JumpCountProp = serializedObject.FindProperty("jumpCount");
+
             m_SpriteRendererProp = serializedObject.FindProperty("spriteRenderer");
             m_DamageableProp = serializedObject.FindProperty("damageable");
             m_MeleeDamagerProp = serializedObject.FindProperty("meleeDamager");
@@ -313,6 +322,9 @@ namespace Gamekit2D
             if (m_MiscSettingsFoldout)
             {
                 EditorGUILayout.PropertyField(m_SpriteOriginallyFacesLeftProp, m_SpriteOriginallyFacesLeftContent);
+                EditorGUILayout.PropertyField(m_OnPlayerStopProp, new GUIContent("On Player Stop")); // 추가
+                EditorGUILayout.PropertyField(m_MaxJumpCountProp, new GUIContent("Max Jump Count")); // 추가
+                EditorGUILayout.PropertyField(m_JumpCountProp, new GUIContent("Jump Count")); // 추가
             }
 
             EditorGUI.indentLevel--;
