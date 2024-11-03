@@ -14519,6 +14519,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1141565061}
+    - targetCorrespondingSourceObject: {fileID: 1125256590603436, guid: 73360cdb4e1e7ed4897690f9d57fd0eb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1141565082}
   m_SourcePrefab: {fileID: 100100000, guid: 73360cdb4e1e7ed4897690f9d57fd0eb, type: 3}
 --- !u!1 &1141565045 stripped
 GameObject:
@@ -14552,10 +14556,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashKey: 304
   gliderKey: 32
-  onDash: 0
+  onDash: 1
   onGlider: 0
-  dashMaxSpeed: 10
-  orginSpeed: 7
+  dashTime: 0.2
+  dashSpeed: 30
+  isDashing: 0
+  runTimeDash: 0
   glideFallSpeed: 1
   originalGravity: 40
 --- !u!114 &1141565065 stripped
@@ -14576,6 +14582,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1141565044}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1141565082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141565045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b13a92b944cae34f9e6d24b6aea5aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 0
+  SlideEA: 30
+  SlideTime: 0.01
+  RedMin: 0
+  RedMax: 255
+  GreenMin: 0
+  GreenMax: 255
+  BlueMin: 0
+  BlueMax: 255
 --- !u!1 &1170099008
 GameObject:
   m_ObjectHideFlags: 0

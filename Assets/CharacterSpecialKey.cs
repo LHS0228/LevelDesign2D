@@ -9,6 +9,8 @@ public class CharacterSpecialKey : MonoBehaviour
 {
     private PlayerCharacter playerCharacter;
     private CharacterController2D characterController2D;
+    private SpriteRenderer spriteRenderer;
+    private Silhouette silhouette;
 
     public KeyCode dashKey = KeyCode.LeftShift;
     public KeyCode gliderKey = KeyCode.Space;
@@ -19,8 +21,11 @@ public class CharacterSpecialKey : MonoBehaviour
     public bool onDoubleJump = false;
 
     [Header("대쉬 설정")]
-    public float dashMaxSpeed = 14;
-    public float orginSpeed = 7;
+    public float dashTime = 0.2f;
+    public float dashSpeed = 10f;
+    public bool isDashing = false;
+    [SerializeField]
+    private float runTimeDash;
 
     [Header("글라이딩 중력 설정")]
     public float glideFallSpeed = 25;
@@ -29,25 +34,36 @@ public class CharacterSpecialKey : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        silhouette = GetComponent<Silhouette>();
         playerCharacter = GetComponent<PlayerCharacter>();
         characterController2D = GetComponent<CharacterController2D>();
+    }
+
+    private void Update()
+    {
+        if (onDash)
+        {
+            if (Input.GetKeyDown(dashKey) && !isDashing)
+            {
+                isDashing = true;
+            }
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        //대쉬
         if (onDash)
         {
-            if (Input.GetKey(dashKey))
+            if(isDashing)
             {
-                playerCharacter.maxSpeed = dashMaxSpeed;
-            }
-            else if (Input.GetKeyUp(dashKey))
-            {
-                playerCharacter.maxSpeed = orginSpeed;
+                Dash();
             }
         }
 
+        //글라이딩
         if (onGlider)
         {
             if (!characterController2D.IsGrounded && Input.GetKey(gliderKey))
@@ -61,6 +77,27 @@ public class CharacterSpecialKey : MonoBehaviour
             {
                 playerCharacter.gravity = originalGravity;
             }
+        }
+    }
+
+    public void Dash()
+    {
+        isDashing = true;
+        silhouette.Active = true;
+        playerCharacter.onMoveStop = true;
+
+        if (runTimeDash < dashTime)
+        {
+            runTimeDash += Time.deltaTime;
+            playerCharacter.m_CharacterController2D.Move(new Vector2(dashSpeed * (spriteRenderer.flipX ? -1 : 1), 0) * Time.deltaTime);
+        }
+        else
+        {
+            runTimeDash = 0;
+            isDashing = false;
+            silhouette.Active = false;
+            playerCharacter.onMoveStop = false;
+            playerCharacter.m_CharacterController2D.Move(Vector2.zero);
         }
     }
 }
