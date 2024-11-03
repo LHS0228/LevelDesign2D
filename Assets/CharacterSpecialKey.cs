@@ -40,17 +40,24 @@ public class CharacterSpecialKey : MonoBehaviour
         characterController2D = GetComponent<CharacterController2D>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
-        //대쉬
         if (onDash)
         {
             if (Input.GetKeyDown(dashKey) && !isDashing)
             {
                 isDashing = true;
             }
-            else if(isDashing)
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        //대쉬
+        if (onDash)
+        {
+            if(isDashing)
             {
                 Dash();
             }
