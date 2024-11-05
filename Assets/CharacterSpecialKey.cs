@@ -54,6 +54,15 @@ public class CharacterSpecialKey : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (isDashing)
+        {
+            gameObject.GetComponent<Damageable>().EnableInvulnerability(true);
+        }
+        else if(!isDashing)
+        {
+            gameObject.GetComponent<Damageable>().DisableInvulnerability();
+        }
+
         //´ë½¬
         if (onDash)
         {
