@@ -24,6 +24,7 @@ public class CharacterSpecialKey : MonoBehaviour
     public float dashTime = 0.2f;
     public float dashSpeed = 10f;
     public bool isDashing = false;
+    public bool dash_Invin = false;
     [SerializeField]
     private float runTimeDash;
 
@@ -56,9 +57,10 @@ public class CharacterSpecialKey : MonoBehaviour
     {
         if (isDashing)
         {
+            dash_Invin = true;
             gameObject.GetComponent<Damageable>().EnableInvulnerability(true);
         }
-        else if(!isDashing)
+        else if(!isDashing && dash_Invin)
         {
             gameObject.GetComponent<Damageable>().DisableInvulnerability();
         }
