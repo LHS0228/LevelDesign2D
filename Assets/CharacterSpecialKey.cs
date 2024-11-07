@@ -32,6 +32,7 @@ public class CharacterSpecialKey : MonoBehaviour
     public float dashSpeed = 10f;
     public bool isDashing = false;
     public DashInvin dash_Invin = DashInvin.None;
+    public bool dashCooldown = false;
     [SerializeField]
     private float runTimeDash;
 
@@ -52,9 +53,13 @@ public class CharacterSpecialKey : MonoBehaviour
     {
         if (onDash)
         {
-            if (Input.GetKeyDown(dashKey))
+            if (Input.GetKeyDown(dashKey) && !dashCooldown)
             {
                 isDashing = true;
+            }
+            if (characterController2D.IsGrounded)
+            {
+                dashCooldown = false;
             }
         }
     }
@@ -75,9 +80,12 @@ public class CharacterSpecialKey : MonoBehaviour
         //´ë½¬
         if (onDash)
         {
-            if(isDashing)
+            if (!playerCharacter.onPlayerStop)
             {
-                Dash();
+                if (isDashing)
+                {
+                    Dash();
+                }
             }
         }
 
@@ -113,6 +121,7 @@ public class CharacterSpecialKey : MonoBehaviour
         else
         {
             runTimeDash = 0;
+            dashCooldown = true;
             isDashing = false;
             silhouette.Active = false;
             playerCharacter.onMoveStop = false;
