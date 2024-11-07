@@ -46,7 +46,7 @@ public class Level2_Event : MonoBehaviour
         switch (animCount)
         {
             case 0:
-                player.GetComponent<PlayerCharacter>().onMoveStop = true;
+                player.GetComponent<PlayerCharacter>().onPlayerStop = true;
                 NextCount(1);
                 break;
             case 1:
@@ -68,7 +68,7 @@ public class Level2_Event : MonoBehaviour
                 break;
             case 3:
                 player.GetComponent<CharacterSpecialKey>().onDoubleJump = true;
-                player.GetComponent<PlayerCharacter>().onMoveStop = false;
+                player.GetComponent<PlayerCharacter>().onPlayerStop = false;
                 animCamera.SetActive(false);
                 mainCamera.SetActive(true);
                 endEvent = true;

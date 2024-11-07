@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Gamekit2D;
 
+public enum DashInvin
+{
+    None,
+    Start,
+    End
+}
+
 [RequireComponent(typeof(PlayerCharacter))]
 [RequireComponent(typeof(PlayerInput))]
 public class CharacterSpecialKey : MonoBehaviour
@@ -24,7 +31,8 @@ public class CharacterSpecialKey : MonoBehaviour
     public float dashTime = 0.2f;
     public float dashSpeed = 10f;
     public bool isDashing = false;
-    public bool dash_Invin = false;
+    public DashInvin dash_Invin = DashInvin.None;
+    public bool dashCooldown = false;
     [SerializeField]
     private float runTimeDash;
 
@@ -45,9 +53,13 @@ public class CharacterSpecialKey : MonoBehaviour
     {
         if (onDash)
         {
-            if (Input.GetKeyDown(dashKey) && !isDashing)
+            if (Input.GetKeyDown(dashKey) && !dashCooldown)
             {
                 isDashing = true;
+            }
+            if (characterController2D.IsGrounded)
+            {
+                dashCooldown = false;
             }
         }
     }
@@ -57,20 +69,23 @@ public class CharacterSpecialKey : MonoBehaviour
     {
         if (isDashing)
         {
-            dash_Invin = true;
             gameObject.GetComponent<Damageable>().EnableInvulnerability(true);
         }
-        else if(!isDashing && dash_Invin)
+        else if(!isDashing && dash_Invin == DashInvin.End)
         {
             gameObject.GetComponent<Damageable>().DisableInvulnerability();
+            dash_Invin = DashInvin.None;
         }
 
         //´ë½¬
         if (onDash)
         {
-            if(isDashing)
+            if (!playerCharacter.onPlayerStop)
             {
-                Dash();
+                if (isDashing)
+                {
+                    Dash();
+                }
             }
         }
 
@@ -96,6 +111,7 @@ public class CharacterSpecialKey : MonoBehaviour
         isDashing = true;
         silhouette.Active = true;
         playerCharacter.onMoveStop = true;
+        dash_Invin = DashInvin.Start;
 
         if (runTimeDash < dashTime)
         {
@@ -105,9 +121,11 @@ public class CharacterSpecialKey : MonoBehaviour
         else
         {
             runTimeDash = 0;
+            dashCooldown = true;
             isDashing = false;
             silhouette.Active = false;
             playerCharacter.onMoveStop = false;
+            dash_Invin = DashInvin.End;
             playerCharacter.m_CharacterController2D.Move(Vector2.zero);
         }
     }
