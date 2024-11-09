@@ -70,6 +70,5 @@ namespace Gamekit2D
             dataSettings.persistenceType = persistenceType;
         }
 
-
     }
 }

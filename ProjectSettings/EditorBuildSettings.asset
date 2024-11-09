@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2DGamekit/Scenes/UI/Loading.unity
     guid: ebc4647ff02971c4ba1b207af066be4d
-  - enabled: 1
+  - enabled: 0
     path: Assets/NewScene.unity
     guid: a341347ecfade124f817cac8ea56a209
   - enabled: 1
@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_1.unity
     guid: 7bcaa870b26a6d947883fc736d4532b2
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: f0d5d4e0f9462ad499e5002c72c76cd5
   m_configObjects: {}

@@ -36,34 +36,50 @@ public class SkillSetting : MonoBehaviour
         switch(skill)
         {
             case "DoubleJump":
-                SaveBool("OnDoubleJump", true);
+                SaveBool("DoubleJump", true);
                 playerSpeicalKey.onDoubleJump = true;
                 break;
 
             case "Dash":
-                SaveBool("OnDash", true);
+                SaveBool("Dash", true);
                 playerSpeicalKey.onDash = true;
                 break;
 
             case "Glider":
-                SaveBool("OnGlide", true);
+                SaveBool("Glide", true);
                 playerSpeicalKey.onGlider = true;
                 break;
         }
     }
 
+    public bool ChooseLoadSkill(string skill)
+    {
+        switch(skill)
+        {
+            case "DoubleJump":
+                return LoadBool("DoubleJump", false);
+            case "Dash":
+                return LoadBool("Dash", false);
+            case "Glide":
+                return LoadBool("Glide", false);
+            default:
+                Debug.Log("로드 조건 잘못 입력 버그");
+                return false;
+        }
+    }
+
     public void LoadSkill()
     {
-        playerSpeicalKey.onDoubleJump = LoadBool("OnDoubleJump", false);
-        playerSpeicalKey.onDash = LoadBool("OnDash", false);
-        playerSpeicalKey.onGlider = LoadBool("OnGlide", false);
+        playerSpeicalKey.onDoubleJump = LoadBool("DoubleJump", false);
+        playerSpeicalKey.onDash = LoadBool("Dash", false);
+        playerSpeicalKey.onGlider = LoadBool("Glide", false);
     }
 
     public void ResetSkill()
     {
-        SaveBool("OnDoubleJump", false);
-        SaveBool("OnDash", false);
-        SaveBool("OnGlide", false);
+        SaveBool("DoubleJump", false);
+        SaveBool("Dash", false);
+        SaveBool("Glide", false);
 
         playerSpeicalKey.onDoubleJump = false;
         playerSpeicalKey.onDash = false;
