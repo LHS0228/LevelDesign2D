@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Gamekit2D;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ public class Level2_Event : MonoBehaviour
     private GameObject upBlock;
     [SerializeField]
     private GameObject downBlock;
+    [SerializeField]
+    private Light2D lightObj;
 
     private float runTime;
     [SerializeField]
@@ -47,6 +50,8 @@ public class Level2_Event : MonoBehaviour
         {
             case 0:
                 player.GetComponent<PlayerCharacter>().onPlayerStop = true;
+                player.GetComponent<Animator>().SetFloat("HorizontalSpeed", 0);
+                player.GetComponent<Animator>().SetFloat("VerticalSpeed", 0);
                 NextCount(1);
                 break;
             case 1:
@@ -59,20 +64,74 @@ public class Level2_Event : MonoBehaviour
                 }
                 break;
             case 2:
-                if(runTime >= 1)
+                if(runTime >= 2)
                 {
-                    upBlock.transform.position += new Vector3(0, 5, 0);
-                    downBlock.transform.position += new Vector3(0, -5, 0);
+                    animCamera.transform.DOMove(new Vector3(87.7f, 28.6f, -18), 3);
                     NextCount(3);
                 }
                 break;
             case 3:
-                player.GetComponent<SkillSetting>().AddSkill("DoubleJump");
-                //player.GetComponent<CharacterSpecialKey>().onDoubleJump = true;
-                player.GetComponent<PlayerCharacter>().onPlayerStop = false;
-                animCamera.SetActive(false);
-                mainCamera.SetActive(true);
-                endEvent = true;
+                if (runTime >= 3)
+                {
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 2.5f, 2);
+                    NextCount(4);
+                }
+                break;
+
+            case 4:
+                if (runTime >= 2)
+                {
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 0, 2);
+                    NextCount(5);
+                }
+                break;
+
+            case 5:
+                if (runTime >= 2)
+                {
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 200, 5);
+                    NextCount(6);
+                }
+                break;
+
+            case 6:
+                if(runTime >= 5)
+                {
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 0, 4);
+                    NextCount(7);
+                }
+                break;
+
+            case 7:
+                if (runTime >= 5)
+                {
+                    upBlock.transform.DOMoveY(5, 3);
+                    downBlock.transform.DOMoveY(-5, 3);
+                    NextCount(8);
+                }
+                break;
+
+            case 8:
+                if (runTime >= 2)
+                {
+                    animCamera.transform.DOMove(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, -13.5f), 3);
+                    NextCount(9);
+                }
+                break;
+
+            case 9:
+                if (runTime >= 2)
+                {
+                    player.GetComponent<SkillSetting>().AddSkill("DoubleJump");
+                    player.GetComponent<PlayerCharacter>().onPlayerStop = false;
+                    animCamera.SetActive(false);
+                    mainCamera.SetActive(true);
+                    endEvent = true;
+                    NextCount(10);
+                }
+                break;
+
+            case 10:
                 break;
         }
     }
