@@ -42,10 +42,9 @@ public class Level1Trigger : MonoBehaviour
         if (!onTrigger)
         {
             onTrigger = true;
-            CharacterSpecialKey characterSpecialKey = collision.GetComponent<CharacterSpecialKey>();
-            characterSpecialKey.onDash = true;
-
-
+            //CharacterSpecialKey characterSpecialKey = collision.GetComponent<CharacterSpecialKey>();
+            //characterSpecialKey.onDash = true;
+            player.GetComponent<SkillSetting>().AddSkill("Dash");
         }
     }
 

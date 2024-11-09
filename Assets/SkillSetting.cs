@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class SkillSetting : MonoBehaviour
 {
-    public CharacterSpecialKey playerSpeicalKey;
+    private CharacterSpecialKey playerSpeicalKey;
+    public bool isStart = false;
+
+    private void Awake()
+    {
+        playerSpeicalKey = GetComponent<CharacterSpecialKey>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(isStart)
+        {
+            ResetSkill();
+        }
+        else
+        {
+            LoadSkill();
+        }
     }
 
     // Update is called once per frame
@@ -18,40 +31,32 @@ public class SkillSetting : MonoBehaviour
         
     }
 
-    public void SaveSkill(string skill)
+    public void AddSkill(string skill)
     {
         switch(skill)
         {
             case "DoubleJump":
                 SaveBool("OnDoubleJump", true);
+                playerSpeicalKey.onDoubleJump = true;
                 break;
 
             case "Dash":
                 SaveBool("OnDash", true);
+                playerSpeicalKey.onDash = true;
                 break;
 
             case "Glider":
                 SaveBool("OnGlide", true);
+                playerSpeicalKey.onGlider = true;
                 break;
         }
     }
 
-    public void LoadSkill(string skill)
+    public void LoadSkill()
     {
-        switch (skill)
-        {
-            case "DoubleJump":
-                playerSpeicalKey.onDoubleJump = LoadBool("OnDoubleJump", false);
-                break;
-
-            case "Dash":
-                playerSpeicalKey.onDash = LoadBool("OnDash", false);
-                break;
-
-            case "Glider":
-                playerSpeicalKey.onGlider = LoadBool("OnGlide", false);
-                break;
-        }
+        playerSpeicalKey.onDoubleJump = LoadBool("OnDoubleJump", false);
+        playerSpeicalKey.onDash = LoadBool("OnDash", false);
+        playerSpeicalKey.onGlider = LoadBool("OnGlide", false);
     }
 
     public void ResetSkill()
@@ -59,6 +64,10 @@ public class SkillSetting : MonoBehaviour
         SaveBool("OnDoubleJump", false);
         SaveBool("OnDash", false);
         SaveBool("OnGlide", false);
+
+        playerSpeicalKey.onDoubleJump = false;
+        playerSpeicalKey.onDash = false;
+        playerSpeicalKey.onGlider = false;
     }
 
     public void SaveBool(string key, bool value)

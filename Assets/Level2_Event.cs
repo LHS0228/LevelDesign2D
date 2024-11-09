@@ -67,7 +67,8 @@ public class Level2_Event : MonoBehaviour
                 }
                 break;
             case 3:
-                player.GetComponent<CharacterSpecialKey>().onDoubleJump = true;
+                player.GetComponent<SkillSetting>().AddSkill("DoubleJump");
+                //player.GetComponent<CharacterSpecialKey>().onDoubleJump = true;
                 player.GetComponent<PlayerCharacter>().onPlayerStop = false;
                 animCamera.SetActive(false);
                 mainCamera.SetActive(true);
