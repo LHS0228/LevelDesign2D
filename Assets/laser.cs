@@ -39,6 +39,20 @@ public class laser : MonoBehaviour
             }
             UpdateLaserScale();
         }
+        else if (transform.eulerAngles.z == 90f)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(startPosition, Vector3.right, Mathf.Infinity, colliderLayer);
+
+            if (hit.collider != null)
+            {
+                currentLength = hit.distance;
+            }
+            else
+            {
+                currentLength = spriteRenderer.size.y;
+            }
+            UpdateLaserScale();
+        }
         else if (transform.eulerAngles.z == 180f)
         {
             RaycastHit2D hit = Physics2D.Raycast(startPosition, Vector3.up, Mathf.Infinity, colliderLayer);
@@ -53,6 +67,7 @@ public class laser : MonoBehaviour
             }
             UpdateLaserScale();
         }
+
 
     }
     void UpdateLaserScale()
