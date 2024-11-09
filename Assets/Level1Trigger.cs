@@ -63,7 +63,7 @@ public class Level1Trigger : MonoBehaviour
         switch (animCount)
         {
             case 0:
-                character.onPlayerStop = true;
+                player.GetComponent<PlayerInput>().ReleaseControl(true);
                 player.GetComponent<Animator>().SetFloat("HorizontalSpeed", 0);
                 player.GetComponent<Animator>().SetFloat("VerticalSpeed", 0);
                 nextCount(1);
@@ -93,7 +93,7 @@ public class Level1Trigger : MonoBehaviour
             case 4:
                 if (currentTime > 4f)
                 {
-                    character.onPlayerStop = false;
+                    player.GetComponent<PlayerInput>().GainControl();
                     maincamera.SetActive(true);
                     eventCamera.SetActive(false);
                     eventCamera.transform.DOMove(new Vector3(113f, 32.5f, -13.5f), 1);

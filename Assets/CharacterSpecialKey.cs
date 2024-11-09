@@ -16,6 +16,7 @@ public class CharacterSpecialKey : MonoBehaviour
 {
     private PlayerCharacter playerCharacter;
     private CharacterController2D characterController2D;
+    private PlayerInput playerInput;
     private SpriteRenderer spriteRenderer;
     private Silhouette silhouette;
 
@@ -47,10 +48,22 @@ public class CharacterSpecialKey : MonoBehaviour
         silhouette = GetComponent<Silhouette>();
         playerCharacter = GetComponent<PlayerCharacter>();
         characterController2D = GetComponent<CharacterController2D>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Update()
     {
+        /*
+        if(onDash)
+        {
+            playerInput.ReleaseControl(true);
+        }
+        else
+        {
+            playerInput.GainControl();
+        }
+        */
+
         if (onDash)
         {
             if (Input.GetKeyDown(dashKey) && !dashCooldown)
@@ -80,7 +93,7 @@ public class CharacterSpecialKey : MonoBehaviour
         //´ë½¬
         if (onDash)
         {
-            if (!playerCharacter.onPlayerStop)
+            if (!playerInput.m_HaveControl)
             {
                 if (isDashing)
                 {

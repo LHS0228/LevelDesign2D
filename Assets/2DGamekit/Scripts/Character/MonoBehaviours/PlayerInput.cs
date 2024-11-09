@@ -24,7 +24,7 @@ namespace Gamekit2D
         [HideInInspector]
         public DataSettings dataSettings;
 
-        protected bool m_HaveControl = true;
+        public bool m_HaveControl = true;
 
         protected bool m_DebugMenuIsOpen = false;
 
