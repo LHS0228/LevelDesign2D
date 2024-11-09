@@ -19,7 +19,6 @@ namespace Gamekit2D
         }
 
         public bool onMoveStop;
-        public bool onPlayerStop;
         [SerializeField]
         private int maxJumpCount = 1; // 점프 후 최대 점프 가능 횟수
         [SerializeField]
@@ -212,17 +211,14 @@ namespace Gamekit2D
 
         void FixedUpdate()
         {
-            if (!onPlayerStop)
+            if (!onMoveStop)
             {
-                if (!onMoveStop)
-                {
-                    m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
-                }
-                m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
-                m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
-                UpdateBulletSpawnPointPositions();
-                UpdateCameraFollowTargetPosition();
+                m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
             }
+            m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
+            m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
+            UpdateBulletSpawnPointPositions();
+            UpdateCameraFollowTargetPosition();
         }
 
         public void Unpause()

@@ -49,7 +49,7 @@ public class Level2_Event : MonoBehaviour
         switch (animCount)
         {
             case 0:
-                player.GetComponent<PlayerCharacter>().onPlayerStop = true;
+                player.GetComponent<PlayerInput>().ReleaseControl(true);
                 player.GetComponent<Animator>().SetFloat("HorizontalSpeed", 0);
                 player.GetComponent<Animator>().SetFloat("VerticalSpeed", 0);
                 NextCount(1);
@@ -123,7 +123,7 @@ public class Level2_Event : MonoBehaviour
                 if (runTime >= 2)
                 {
                     player.GetComponent<SkillSetting>().AddSkill("DoubleJump");
-                    player.GetComponent<PlayerCharacter>().onPlayerStop = false;
+                    player.GetComponent<PlayerInput>().GainControl();
                     animCamera.SetActive(false);
                     mainCamera.SetActive(true);
                     endEvent = true;

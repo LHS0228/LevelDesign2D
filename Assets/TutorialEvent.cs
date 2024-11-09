@@ -51,7 +51,7 @@ public class TutorialEvent : MonoBehaviour
         switch(animCount)
         {
             case 0:
-                playerCharacter.onPlayerStop = true;
+                player.GetComponent<PlayerInput>().ReleaseControl(true);
                 player.GetComponent<Animator>().SetFloat("HorizontalSpeed", 0);
                 player.GetComponent<Animator>().SetFloat("VerticalSpeed", 0);
                 nextCount(1);
@@ -115,7 +115,7 @@ public class TutorialEvent : MonoBehaviour
             case 8:
                 if(runTime > 3)
                 {
-                    playerCharacter.onPlayerStop = false;
+                    player.GetComponent<PlayerInput>().GainControl();
                     mainCamera.SetActive(true);
                     animCamera.SetActive(false);
                     nextCount(9);
