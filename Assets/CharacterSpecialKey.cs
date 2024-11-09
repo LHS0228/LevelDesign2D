@@ -93,7 +93,7 @@ public class CharacterSpecialKey : MonoBehaviour
         //´ë½¬
         if (onDash)
         {
-            if (!playerInput.m_HaveControl)
+            if (playerInput.m_HaveControl)
             {
                 if (isDashing)
                 {
