@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class laser : MonoBehaviour
 {// 위에서 아래로 가는 레이저일 때
@@ -12,7 +13,19 @@ public class laser : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();  // 스프라이트 렌더러 초기화
         currentLength = spriteRenderer.size.y;
-        UpdateLaserLength();                              // 레이저 길이 설정
+        UpdateLaserLength();// 레이저 길이 설정
+
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if(currentScene == "Level_1")
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }
+
     }
 
     void Update()
@@ -77,4 +90,8 @@ public class laser : MonoBehaviour
         transform.localScale = scale;
     }
 
+    public void OnLaser()
+    {
+        gameObject.SetActive(true);
+    }
 }

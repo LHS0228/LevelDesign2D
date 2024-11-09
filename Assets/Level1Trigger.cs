@@ -19,6 +19,8 @@ public class Level1Trigger : MonoBehaviour
     [SerializeField]
     private PlayerCharacter character;
 
+    private laser[] lasers;
+
     private bool onTrigger = false; //이벤트 여부
 
     private float currentTime;
@@ -27,6 +29,7 @@ public class Level1Trigger : MonoBehaviour
     private void Awake()
     {
         eventCamera.SetActive(false);
+        lasers = FindObjectsOfType<laser>();
     }
 
     private void FixedUpdate()
@@ -45,6 +48,13 @@ public class Level1Trigger : MonoBehaviour
             //CharacterSpecialKey characterSpecialKey = collision.GetComponent<CharacterSpecialKey>();
             //characterSpecialKey.onDash = true;
             player.GetComponent<SkillSetting>().AddSkill("Dash");
+            foreach(laser laser in lasers)
+            {
+                if(laser.CompareTag("Laser"))
+                {
+                    laser.OnLaser();
+                }
+            }
         }
     }
 
