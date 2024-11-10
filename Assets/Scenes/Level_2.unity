@@ -10264,11 +10264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4212235226361802, guid: 73360cdb4e1e7ed4897690f9d57fd0eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 101.5
+      value: -5.8
       objectReference: {fileID: 0}
     - target: {fileID: 4212235226361802, guid: 73360cdb4e1e7ed4897690f9d57fd0eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.64
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4852862722263638, guid: 73360cdb4e1e7ed4897690f9d57fd0eb, type: 3}
       propertyPath: m_RootOrder
@@ -10454,7 +10454,7 @@ MonoBehaviour:
   onGlider: 0
   onDoubleJump: 1
   dashTime: 0.1
-  dashSpeed: 15
+  dashSpeed: 25
   isDashing: 0
   dash_Invin: 0
   dashCooldown: 0
