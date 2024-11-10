@@ -45,7 +45,7 @@ public class SkillSetting : MonoBehaviour
                 playerSpeicalKey.onDash = true;
                 break;
 
-            case "Glider":
+            case "Glide":
                 SaveBool("Glide", true);
                 playerSpeicalKey.onGlider = true;
                 break;
