@@ -19,7 +19,10 @@ public class laser : MonoBehaviour
 
         if(currentScene == "Level_1")
         {
-            gameObject.SetActive(false);
+            if (gameObject.CompareTag("Laser"))
+            {
+                gameObject.SetActive(false);
+            }
         }
         else
         {
