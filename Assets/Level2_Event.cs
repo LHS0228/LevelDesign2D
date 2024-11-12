@@ -66,14 +66,14 @@ public class Level2_Event : MonoBehaviour
             case 2:
                 if(runTime >= 2)
                 {
-                    animCamera.transform.DOMove(new Vector3(87.7f, 28.6f, -18), 3);
+                    animCamera.transform.DOMove(new Vector3(93.34f, 28.6f, -18), 3);
                     NextCount(3);
                 }
                 break;
             case 3:
                 if (runTime >= 3)
                 {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 2.5f, 2);
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 10, 2);
                     NextCount(4);
                 }
                 break;
@@ -87,9 +87,9 @@ public class Level2_Event : MonoBehaviour
                 break;
 
             case 5:
-                if (runTime >= 2)
+                if (runTime >= 4)
                 {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 200, 5);
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 80, 5);
                     NextCount(6);
                 }
                 break;
