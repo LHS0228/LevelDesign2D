@@ -115,7 +115,7 @@ public class Level1Trigger : MonoBehaviour
                     maincamera.SetActive(true);
                     eventCamera.SetActive(false);
                     eventCamera.transform.DOMove(new Vector3(113f, 32.5f, -13.5f), 1);
-                    //SaveBool("Level1_Event", true); // 빌드할꺼면 풀고해야함
+                    SaveBool("Level1_Event", true); // 빌드할꺼면 풀고해야함
                     nextCount(6);
                 }
                 break;
