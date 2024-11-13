@@ -1,3 +1,4 @@
+using Gamekit2D;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,11 @@ public class laser : MonoBehaviour
     public float currentLength;
     public LayerMask colliderLayer;
     private SpriteRenderer spriteRenderer;
-
+    private Damager damager;
+    private void Awake()
+    {
+        damager = GetComponent<Damager>();
+    }
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();  // 스프라이트 렌더러 초기화
@@ -68,6 +73,7 @@ public class laser : MonoBehaviour
                 currentLength = spriteRenderer.size.y;
             }
             UpdateLaserScale();
+            damager.size.x = currentLength;
         }
         else if (transform.eulerAngles.z == 180f)
         {
