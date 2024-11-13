@@ -90,7 +90,7 @@ public class Level1Trigger : MonoBehaviour
             case 2:
                 if (currentTime > 2f)
                 {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 2f, 2);
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 10f, 2);
                     nextCount(3);
                 }
                 break;
