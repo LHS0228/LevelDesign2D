@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
 
 public class Level1Trigger : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Level1Trigger : MonoBehaviour
     private PlayerCharacter character;
 
     private laser[] lasers;
+    [SerializeField]
+    private Light2D lightObj;
 
     private bool onTrigger = false; //이벤트 여부
     private bool endEvent = false; //한번 실행된 이벤트인지 검사
@@ -80,34 +83,43 @@ public class Level1Trigger : MonoBehaviour
                 {
                     maincamera.SetActive(false);
                     eventCamera.SetActive(true);
-                    eventCamera.transform.DOMove(new Vector3(119.5f, 34.5f, -13.5f), 3);
+                    eventCamera.transform.DOMove(new Vector3(123f, 36.5f, -13.5f), 3);
                     nextCount(2);
                 }
                 break;
             case 2:
                 if (currentTime > 2f)
                 {
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 2f, 2);
                     nextCount(3);
                 }
                 break;
             case 3:
                 if (currentTime > 3f)
                 {
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 0, 2);
                     nextCount(4);
                 }
                 break;
             case 4:
                 if (currentTime > 4f)
                 {
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 1f, 1);
+                    nextCount(5);
+                }
+                break;
+            case 5:
+                if (currentTime > 5f)
+                {
                     player.GetComponent<PlayerInput>().GainControl();
                     maincamera.SetActive(true);
                     eventCamera.SetActive(false);
                     eventCamera.transform.DOMove(new Vector3(113f, 32.5f, -13.5f), 1);
                     //SaveBool("Level1_Event", true); // 빌드할꺼면 풀고해야함
-                    nextCount(5);
+                    nextCount(6);
                 }
                 break;
-            case 5:
+            case 6:
                 break;
 
         }
