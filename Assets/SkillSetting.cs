@@ -10,6 +10,10 @@ public class SkillSetting : MonoBehaviour
     private void Awake()
     {
         playerSpeicalKey = GetComponent<CharacterSpecialKey>();
+
+        PlayerPrefs.SetInt("Level1_Event", 0);
+        PlayerPrefs.SetInt("Level2_Event", 0);
+        PlayerPrefs.SetInt("Level3_Event", 0);
     }
 
     // Start is called before the first frame update
