@@ -22,6 +22,7 @@ public class Level1Trigger : MonoBehaviour
     private laser[] lasers;
 
     private bool onTrigger = false; //이벤트 여부
+    private bool endEvent = false; //한번 실행된 이벤트인지 검사
 
     private float currentTime;
     private int animCount;
@@ -32,9 +33,14 @@ public class Level1Trigger : MonoBehaviour
         lasers = FindObjectsOfType<laser>();
     }
 
+    private void Start()
+    {
+        endEvent = LoadBool("Level1_Event", false);
+    }
+
     private void FixedUpdate()
     {
-        if (onTrigger)
+        if (!endEvent && onTrigger)
         {
             currentTime += Time.deltaTime;
             StartEvent();
@@ -97,6 +103,7 @@ public class Level1Trigger : MonoBehaviour
                     maincamera.SetActive(true);
                     eventCamera.SetActive(false);
                     eventCamera.transform.DOMove(new Vector3(113f, 32.5f, -13.5f), 1);
+                    //SaveBool("Level1_Event", true); // 빌드할꺼면 풀고해야함
                     nextCount(5);
                 }
                 break;
@@ -113,5 +120,16 @@ public class Level1Trigger : MonoBehaviour
     {
         currentTime = 0;
         animCount = num;
+    }
+
+    public void SaveBool(string key, bool value)
+    {
+        PlayerPrefs.SetInt(key, value ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public bool LoadBool(string key, bool defaultValue = false)
+    {
+        return PlayerPrefs.GetInt(key, defaultValue ? 1 : 0) == 1;
     }
 }

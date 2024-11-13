@@ -22,6 +22,7 @@ public class Level3_Trigger : MonoBehaviour
     private Light2D lightObj;
 
     private bool onTrigger = false; //이벤트 여부
+    private bool endEvent = false; //한번 발생한 이벤트?
 
     private float currentTime;
     private int animCount;
@@ -31,9 +32,14 @@ public class Level3_Trigger : MonoBehaviour
         eventCamera.SetActive(false);
     }
 
+    private void Start()
+    {
+        endEvent = LoadBool("Level3_Event", false);
+    }
+
     private void FixedUpdate()
     {
-        if (onTrigger)
+        if (!endEvent && onTrigger)
         {
             currentTime += Time.deltaTime;
             StartEvent();
@@ -108,6 +114,7 @@ public class Level3_Trigger : MonoBehaviour
                     player.GetComponent<PlayerInput>().GainControl();
                     maincamera.SetActive(true);
                     eventCamera.SetActive(false);
+                    //SaveBool("Level3_Event", true); //빌드할꺼면 이거 풀고해야함
                     nextCount(8);
                 }
                 break;
@@ -129,5 +136,16 @@ public class Level3_Trigger : MonoBehaviour
     {
         currentTime = 0;
         animCount = num;
+    }
+
+    public void SaveBool(string key, bool value)
+    {
+        PlayerPrefs.SetInt(key, value ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public bool LoadBool(string key, bool defaultValue = false)
+    {
+        return PlayerPrefs.GetInt(key, defaultValue ? 1 : 0) == 1;
     }
 }

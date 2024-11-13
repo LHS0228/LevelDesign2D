@@ -127,6 +127,7 @@ public class Level2_Event : MonoBehaviour
                     animCamera.SetActive(false);
                     mainCamera.SetActive(true);
                     endEvent = true;
+                    //SaveBool("Level2_Event", true); //한번 발동했나요? (빌드할떄 이거 주석처리 풀기)
                     NextCount(10);
                 }
                 break;
@@ -139,7 +140,6 @@ public class Level2_Event : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         onEvent = true;
-        //SaveBool("Level2_Event", false);
     }
 
     public void SaveBool(string key, bool value)
