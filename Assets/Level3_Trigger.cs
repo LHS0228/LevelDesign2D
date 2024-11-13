@@ -108,8 +108,9 @@ public class Level3_Trigger : MonoBehaviour
                     player.GetComponent<PlayerInput>().GainControl();
                     maincamera.SetActive(true);
                     eventCamera.SetActive(false);
-                    //SaveBool("Level3_Event", true); //빌드할꺼면 이거 풀고해야함
-                    nextCount(7);                }
+                    SaveBool("Level3_Event", true); //빌드할꺼면 이거 풀고해야함
+                    nextCount(7);
+                }
                 break;
             case 7:
                 if (currentTime > 7f)
