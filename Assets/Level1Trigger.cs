@@ -38,6 +38,11 @@ public class Level1Trigger : MonoBehaviour
     private void Start()
     {
         endEvent = LoadBool("Level1_Event", false);
+
+        if(endEvent)
+        {
+            lightObj.intensity = 10;
+        }
     }
 
     private void FixedUpdate()
@@ -74,6 +79,7 @@ public class Level1Trigger : MonoBehaviour
                 player.GetComponent<PlayerInput>().ReleaseControl(true);
                 player.GetComponent<Animator>().SetFloat("HorizontalSpeed", 0);
                 player.GetComponent<Animator>().SetFloat("VerticalSpeed", 0);
+                eventCamera.transform.position = maincamera.transform.position;
                 nextCount(1);
                 break;
 
@@ -89,26 +95,26 @@ public class Level1Trigger : MonoBehaviour
             case 2:
                 if (currentTime > 2f)
                 {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 10f, 2);
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 1, 2);
                     nextCount(3);
                 }
                 break;
             case 3:
-                if (currentTime > 3f)
+                if (currentTime > 2)
                 {
                     DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 0, 2);
                     nextCount(4);
                 }
                 break;
             case 4:
-                if (currentTime > 4f)
+                if (currentTime > 2)
                 {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 1f, 1);
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 10f, 2);
                     nextCount(5);
                 }
                 break;
             case 5:
-                if (currentTime > 5f)
+                if (currentTime > 3f)
                 {
                     player.GetComponent<PlayerInput>().GainControl();
                     maincamera.SetActive(true);

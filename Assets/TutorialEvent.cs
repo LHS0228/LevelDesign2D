@@ -69,19 +69,19 @@ public class TutorialEvent : MonoBehaviour
             case 2:
                 if(runTime > 3)
                 {
-                    DOTween.To(() => lightPart.intensity, x => lightPart.intensity = x, 10, 4);
+                    DOTween.To(() => lightPart.intensity, x => lightPart.intensity = x, 10, 3);
                     nextCount(3);
                 }
                 break;
             case 3:
-                if (runTime > 4)
+                if (runTime > 3)
                 {
                     DOTween.To(() => lightPart.intensity, x => lightPart.intensity = x, 2.5f, 3);
                     nextCount(4);
                 }
                 break;
             case 4:
-                if(runTime > 5)
+                if(runTime > 3)
                 {
                     animCamera.transform.DOMove(new Vector3(105.9f, 35.9f, -13.5f), 5);
                     DOTween.To(() => animCamera.GetComponent<Camera>().fieldOfView, x => animCamera.GetComponent<Camera>().fieldOfView = x, 79.3f, 5);

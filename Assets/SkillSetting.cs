@@ -10,7 +10,6 @@ public class SkillSetting : MonoBehaviour
     private void Awake()
     {
         playerSpeicalKey = GetComponent<CharacterSpecialKey>();
-
         PlayerPrefs.SetInt("Level1_Event", 0);
         PlayerPrefs.SetInt("Level2_Event", 0);
         PlayerPrefs.SetInt("Level3_Event", 0);
@@ -22,10 +21,17 @@ public class SkillSetting : MonoBehaviour
         if(isStart)
         {
             ResetSkill();
+
+            //PlayerPrefs.SetInt("Level1_Event", 0);
+            //PlayerPrefs.SetInt("Level2_Event", 0);
+            //PlayerPrefs.SetInt("Level3_Event", 0);
         }
         else
         {
             LoadSkill();
+            //PlayerPrefs.GetInt("Level1_Event", 0);
+            //PlayerPrefs.GetInt("Level2_Event", 0);
+            //PlayerPrefs.GetInt("Level3_Event", 0);
         }
     }
 

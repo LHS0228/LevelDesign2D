@@ -42,6 +42,11 @@ public class Level2_Event : MonoBehaviour
             Anim();
             runTime += Time.deltaTime;
         }
+
+        if(endEvent)
+        {
+            lightObj.intensity = 20;
+        }
     }
 
     private void Anim()
@@ -55,7 +60,7 @@ public class Level2_Event : MonoBehaviour
                 NextCount(1);
                 break;
             case 1:
-                if(runTime >= 2f)
+                if(runTime >= 1f)
                 {
                     animCamera.transform.position = mainCamera.transform.position;
                     animCamera.SetActive(true);
@@ -64,7 +69,7 @@ public class Level2_Event : MonoBehaviour
                 }
                 break;
             case 2:
-                if(runTime >= 2)
+                if(runTime >= 1)
                 {
                     animCamera.transform.DOMove(new Vector3(93.34f, 28.6f, -18), 3);
                     NextCount(3);
@@ -73,7 +78,7 @@ public class Level2_Event : MonoBehaviour
             case 3:
                 if (runTime >= 3)
                 {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 10, 2);
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 3, 2);
                     NextCount(4);
                 }
                 break;
@@ -87,23 +92,15 @@ public class Level2_Event : MonoBehaviour
                 break;
 
             case 5:
-                if (runTime >= 4)
+                if (runTime >= 3)
                 {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 80, 5);
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 20, 3);
                     NextCount(6);
                 }
                 break;
 
             case 6:
-                if(runTime >= 5)
-                {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 0, 4);
-                    NextCount(7);
-                }
-                break;
-
-            case 7:
-                if (runTime >= 5)
+                if (runTime >= 3)
                 {
                     upBlock.transform.DOMoveY(5, 3);
                     downBlock.transform.DOMoveY(-5, 3);
@@ -111,7 +108,7 @@ public class Level2_Event : MonoBehaviour
                 }
                 break;
 
-            case 8:
+            case 7:
                 if (runTime >= 2)
                 {
                     animCamera.transform.DOMove(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, -13.5f), 3);
@@ -119,7 +116,7 @@ public class Level2_Event : MonoBehaviour
                 }
                 break;
 
-            case 9:
+            case 8:
                 if (runTime >= 2)
                 {
                     player.GetComponent<SkillSetting>().AddSkill("DoubleJump");
@@ -132,7 +129,7 @@ public class Level2_Event : MonoBehaviour
                 }
                 break;
 
-            case 10:
+            case 9:
                 break;
         }
     }

@@ -44,6 +44,11 @@ public class Level3_Trigger : MonoBehaviour
             currentTime += Time.deltaTime;
             StartEvent();
         }
+
+        if (endEvent)
+        {
+            lightObj.intensity = 3;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -89,21 +94,21 @@ public class Level3_Trigger : MonoBehaviour
                 }
                 break;
             case 4:
-                if (currentTime > 4f)
+                if (currentTime > 3f)
                 {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 2f, 2);
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 3f, 2);
                     nextCount(5);
                 }
                 break;
             case 5:
-                if (currentTime > 5f)
+                if (currentTime > 3f)
                 {
                     eventCamera.transform.DOMove(new Vector3(74f, 24f, -13.5f), 2);
                     nextCount(6);
                 }
                 break;
             case 6:
-                if (currentTime > 6f)
+                if (currentTime > 4f)
                 {
                     player.GetComponent<PlayerInput>().GainControl();
                     maincamera.SetActive(true);
