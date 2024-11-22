@@ -94,37 +94,27 @@ public class Level3_Trigger : MonoBehaviour
                 }
                 break;
             case 4:
-                if (currentTime > 3f)
+                if (currentTime > 4f)
                 {
                     DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 3f, 2);
+                    eventCamera.transform.DOMove(new Vector3(74f, 24f, -13.5f), 2);
                     nextCount(5);
                 }
                 break;
             case 5:
-                if (currentTime > 3f)
-                {
-                    eventCamera.transform.DOMove(new Vector3(74f, 24f, -13.5f), 2);
-                    nextCount(6);
-                }
-                break;
-            case 6:
-                if (currentTime > 4f)
+                if (currentTime > 5f)
                 {
                     player.GetComponent<PlayerInput>().GainControl();
                     maincamera.SetActive(true);
                     eventCamera.SetActive(false);
                     SaveBool("Level3_Event", true); //빌드할꺼면 이거 풀고해야함
-                    nextCount(7);
+                    nextCount(6);
                 }
                 break;
-            case 7:
-                if (currentTime > 7f)
-                {
-                    nextCount(8);
-                }
+            case 6:
+
                 break;
-            case 8:
-                break;
+
 
 
 
