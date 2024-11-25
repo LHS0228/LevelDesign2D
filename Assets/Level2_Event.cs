@@ -94,7 +94,7 @@ public class Level2_Event : MonoBehaviour
             case 5:
                 if (runTime >= 3)
                 {
-                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 20, 3);
+                    DOTween.To(() => lightObj.intensity, x => lightObj.intensity = x, 10f, 3);
                     NextCount(6);
                 }
                 break;
