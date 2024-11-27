@@ -33,7 +33,7 @@ public class OrbDoor : MonoBehaviour
         openDoor = new bool[3];
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if(!hasExecuted)
         {
